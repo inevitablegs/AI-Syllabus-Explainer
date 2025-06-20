@@ -27,37 +27,14 @@ def home(request):
     return render(request, "explainer/home.html", {"result": result})
 
 
-import re
 import markdown
-from html import unescape
+
 
 def format_text(text: str) -> str:
     """
     Converts Gemini-style AI syllabus markdown-ish text to clean HTML using markdown module.
     """
-    # Unescape HTML entities
-    # text = unescape(raw_text)
-
-    # # Remove excessive bold markers (**, ***, etc.)
-    # text = re.sub(r"\*{2,}", "", text)
-
-    # # Format Unit Headings
-    # text = re.sub(r"📘\s*(Unit\s*\d+:.*?)\n?-*", r"\n## 📘 \1\n", text, flags=re.IGNORECASE)
-
-    # # Convert labels into markdown subheadings
-    # text = re.sub(r"In Simple Terms:", r"### 🧠 Simple Explanation", text)
-    # text = re.sub(r"Key Concepts:", r"### 📌 Key Concepts", text)
-    # text = re.sub(r"Resources:", r"### 🔗 Resources", text)
-    # text = re.sub(r"YouTube:", r"#### 🎥 YouTube", text)
-    # text = re.sub(r"Web:", r"#### 🌐 Web", text)
-
-    # # Replace Gemini bullets
-    # text = re.sub(r"^\s*→\s*", "* ", text, flags=re.MULTILINE)
-    # text = re.sub(r"^\s*•\s*", "* ", text, flags=re.MULTILINE)
-
-    # # Cleanup extra spacing
-    # text = re.sub(r"\n{3,}", "\n\n", text).strip()
-
+    import markdown
     # Convert to HTML using markdown module
     html = markdown.markdown(text, extensions=['fenced_code', 'tables'])
     return html
